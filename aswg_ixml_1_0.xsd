@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://sce/aswg/ixml"
+           version="1.0"
+           xmlns="http://sce/aswg/ixml">
+
+    <xs:simpleType name="floatList">
+        <xs:list itemType="xs:float"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="positiveFloat">
+        <xs:restriction base="xs:float">
+            <xs:minInclusive value="0" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="positiveInt">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="isrcType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\s*|[a-zA-Z]{2}[a-zA-Z]{3}[0-9]{2}[0-9]{5}|[a-zA-Z]{2} [a-zA-Z]{3} [0-9]{2} [0-9]{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="iso6391Type">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\s*|[a-zA-Z]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ambisonicFormatType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\s*|[0-9]p|[0-9]h[0-9]p|[0-9]h[0-9]v"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ambisonicChnOrderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Unknown" />
+            <xs:enumeration value="Fuma" />
+            <xs:enumeration value="ACN" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ambisonicNormType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Unknown" />
+            <xs:enumeration value="SN3D" />
+            <xs:enumeration value="MAXN" />
+            <xs:enumeration value="N3D" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ratioType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\s*|[0-9]*:[0-9]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="versionType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\s*|[0-9]*.[0-9]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--Prevent _ and - being used in ucs strings which make up ucsFilename--> 
+    <xs:simpleType name="ucsStringType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\s*|[^_-]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="channelConfigType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Unknown" />
+            <xs:enumeration value="Mono" />
+            <xs:enumeration value="Stereo" />
+            <xs:enumeration value="LCR" />
+            <xs:enumeration value="Quad" />
+            <xs:enumeration value="5.0" />
+            <xs:enumeration value="5.1" />
+            <xs:enumeration value="7.0" />
+            <xs:enumeration value="7.1" />
+            <xs:enumeration value="12.2" />
+            <xs:enumeration value="Ambisonic" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="micConfigType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Unknown" />
+            <xs:enumeration value="Mono" />
+            <xs:enumeration value="AB" />
+            <xs:enumeration value="XY" />
+            <xs:enumeration value="ORTF" />
+            <xs:enumeration value="MS" />
+            <xs:enumeration value="other" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="genderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Unknown" />
+            <xs:enumeration value="Female" />
+            <xs:enumeration value="Male" />
+            <xs:enumeration value="Other" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="spectralDensityType">
+        <xs:restriction base="floatList">
+            <xs:length value="24"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="metadataType">
+        <xs:sequence>
+            <xs:element name="contentType" type="xs:string" minOccurs="0"/>
+            <xs:element name="project" type="xs:string" minOccurs="0"/>
+            <xs:element name="originator" type="xs:string" minOccurs="0"/>
+            <xs:element name="originatorStudio" type="xs:string" minOccurs="0"/>
+            <xs:element name="notes" type="xs:string" minOccurs="0"/>
+            <xs:element name="session" type="xs:string" minOccurs="0"/>
+            <xs:element name="state" type="xs:string" minOccurs="0"/>
+            <xs:element name="editor" type="xs:string" minOccurs="0"/>
+            <xs:element name="mixer" type="xs:string" minOccurs="0"/>
+            <xs:element name="fxChainName" type="xs:string" minOccurs="0"/>
+            <xs:element name="channelConfig" type="channelConfigType" default="Unknown" minOccurs="0"/>
+            <xs:element name="ambisonicFormat" type="ambisonicFormatType" minOccurs="0"/>
+            <xs:element name="ambisonicChnOrder" type="ambisonicChnOrderType" default="Unknown" minOccurs="0"/>
+            <xs:element name="ambisonicNorm" type="ambisonicNormType" default="Unknown" minOccurs="0"/>
+            <xs:element name="micType" type="xs:string" minOccurs="0"/>
+            <xs:element name="micConfig" type="micConfigType" default="Unknown" minOccurs="0"/>
+            <xs:element name="micDistance" type="xs:string" minOccurs="0"/>
+            <xs:element name="recordingLoc" type="xs:string" minOccurs="0"/>
+            <xs:element name="isDesigned" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="recEngineer" type="xs:string" minOccurs="0"/>
+            <xs:element name="recStudio" type="xs:string" minOccurs="0"/>
+            <xs:element name="impulseLocation" type="xs:string" minOccurs="0"/>
+            <xs:element name="category" type="ucsStringType" minOccurs="0"/>
+            <xs:element name="subCategory" type="ucsStringType" minOccurs="0"/>
+            <xs:element name="catId" type="ucsStringType" minOccurs="0"/>
+            <xs:element name="userCategory" type="ucsStringType" minOccurs="0"/>
+            <xs:element name="userData" type="ucsStringType" minOccurs="0"/>
+            <xs:element name="vendorCategory" type="ucsStringType" minOccurs="0"/>
+            <xs:element name="fxName" type="ucsStringType" minOccurs="0"/>
+            <xs:element name="library" type="xs:string" minOccurs="0"/>
+            <xs:element name="creatorId" type="ucsStringType" minOccurs="0"/>
+            <xs:element name="sourceId" type="xs:string" minOccurs="0"/>
+            <xs:element name="rmsPower" type="xs:float" minOccurs="0"/>
+            <xs:element name="loudness" type="xs:float" minOccurs="0"/>
+            <xs:element name="loudnessRange" type="positiveFloat" minOccurs="0"/>
+            <xs:element name="maxPeak" type="xs:float" minOccurs="0"/>
+            <xs:element name="specDensity" type="spectralDensityType" minOccurs="0"/>
+            <xs:element name="zeroCrossRate" type="positiveFloat" minOccurs="0"/>
+            <xs:element name="papr" type="xs:float" minOccurs="0"/>
+            <xs:element name="text" type="xs:string" minOccurs="0"/>
+            <xs:element name="efforts" type="xs:string" minOccurs="0"/>
+            <xs:element name="effortType" type="xs:string" minOccurs="0"/>
+            <xs:element name="projection" type="positiveInt" minOccurs="0"/>
+            <xs:element name="language" type="iso6391Type" minOccurs="0"/>
+            <xs:element name="timingRestriction" type="xs:string" minOccurs="0"/>
+            <xs:element name="characterName" type="xs:string" minOccurs="0"/>
+            <xs:element name="characterGender" type="genderType" default="Unknown" minOccurs="0"/>
+            <xs:element name="characterAge" type="positiveInt" minOccurs="0"/>
+            <xs:element name="characterRole" type="xs:string" minOccurs="0"/>
+            <xs:element name="actorName" type="xs:string" minOccurs="0"/>
+            <xs:element name="actorGender" type="genderType" default="Unknown" minOccurs="0"/>
+            <xs:element name="director" type="xs:string" minOccurs="0"/>
+            <xs:element name="direction" type="xs:string" minOccurs="0"/>
+            <xs:element name="fxUsed" type="xs:string" minOccurs="0"/>
+            <xs:element name="usageRights" type="xs:string" minOccurs="0"/>
+            <xs:element name="isUnion" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="accent" type="xs:string" minOccurs="0"/>
+            <xs:element name="emotion" type="xs:string" minOccurs="0"/>
+            <xs:element name="billingCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="composer" type="xs:string" minOccurs="0"/>
+            <xs:element name="artist" type="xs:string" minOccurs="0"/>
+            <xs:element name="songTitle" type="xs:string" minOccurs="0"/>
+            <xs:element name="genre" type="xs:string" minOccurs="0"/>
+            <xs:element name="subGenre" type="xs:string" minOccurs="0"/>
+            <xs:element name="producer" type="xs:string" minOccurs="0"/>
+            <xs:element name="musicSup" type="xs:string" minOccurs="0"/>
+            <xs:element name="instrument" type="xs:string" minOccurs="0"/>
+            <xs:element name="musicPublisher" type="xs:string" minOccurs="0"/>
+            <xs:element name="rightsOwner" type="xs:string" minOccurs="0"/>
+            <xs:element name="isSource" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="isLoop" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="intensity" type="xs:string" minOccurs="0"/>
+            <xs:element name="isFinal" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="orderRef" type="xs:string" minOccurs="0"/>
+            <xs:element name="isOst" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="isCinematic" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="isLicensed" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="isDiegetic" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="musicVersion" type="xs:string" minOccurs="0"/>
+            <xs:element name="isrcId" type="isrcType" minOccurs="0"/>
+            <xs:element name="tempo" type="positiveFloat" minOccurs="0"/>
+            <xs:element name="timeSig" type="ratioType" minOccurs="0"/>
+            <xs:element name="inKey" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="streamMetadataType">
+        <xs:complexContent>
+            <xs:extension base="metadataType"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="aswgType">
+        <xs:complexContent>
+            <xs:extension base="metadataType">
+                <xs:sequence>
+                    <xs:element name="schemaVersion" type="versionType" default="1.0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>
