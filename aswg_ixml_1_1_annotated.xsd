@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://sce/aswg/ixml"
+           version="1.1"
+           xmlns="http://sce/aswg/ixml">
+
+  <xs:include schemaLocation="aswg_ixml_1_1.xsd"/>
+  
+  <xs:redefine schemaLocation="aswg_ixml_1_1.xsd">
+    
+    <xs:complexType name="metadataType">
+      <xs:annotation>
+        <xs:appinfo>
+          <attributeInfo attribute="contentType" displayName="Content Type" description="Content Type (sfx/music/dialog/haptic/impulse/mixed)" category="General"/>
+          <attributeInfo attribute="project" displayName="Project Name" description="Project name asset was developed for" category="General"/>
+          <attributeInfo attribute="originator" displayName="Originator" description="Designer" category="General"/>
+          <attributeInfo attribute="originatorStudio" displayName="Originating Studio" description="Name of originating studio" category="General"/>
+          <attributeInfo attribute="notes" displayName="Notes" description="General information not covered in other fields" category="General"/>
+          <attributeInfo attribute="session" displayName="Source" description="Application (Pro Tools/Reaper etc.) session name" category="General"/>
+          <attributeInfo attribute="state" displayName="File Version" description="File version: mastered, processed, raw, placeholder" category="General"/>
+          <attributeInfo attribute="editor" displayName="Editor" description="Name of editor" category="General"/>
+          <attributeInfo attribute="mixer" displayName="Mix Engineer" description="Mix engineer" category="General"/>
+          <attributeInfo attribute="fxChainName" displayName="FX Chain Name" description="Name of FX chain used on file, Reaper chain name, for example" category="General"/>
+          <attributeInfo attribute="isGenerated" displayName="Is Generated" description="Content is AI generated, or contains elements/sections that are AI generated. true/false" category="General"/>
+          <attributeInfo attribute="masteringEngineer" displayName="Mastering Engineer" description="Name of the mastering engineer" category="General"/>
+          <attributeInfo attribute="originationDate" displayName="Origination Date" description="Date of original upload of asset in format yyyy-MM-dd" category="General"/>
+          <attributeInfo attribute="channelConfig" displayName="Channel Config" description="Channel configuration of the file: mono, stereo, LCR, Quad, 5.0, 5.1, 7.0, 7.1, 12.2, ambisonic" category="Format"/>
+          <attributeInfo attribute="ambisonicFormat" displayName="Ambisonic Format" description="Ambisonic format: #p, #h#p, #h#v.  eg: 5p, 3h1v, 4h2p" category="Format" format="#p, #h#p, #h#v.  eg: '5p', '3h1v', '4h2p'"/>
+          <attributeInfo attribute="ambisonicChnOrder" displayName="Ambisonic Channel Order" description="Ambisonic channel order: fuma, acn" category="Format"/>
+          <attributeInfo attribute="ambisonicNorm" displayName="Ambisonic Channel Normalization" description="Ambisonic normalization: snd3, maxn, n3d" category="Format"/>
+          <attributeInfo attribute="micType" displayName="Microphone Type" description="Microphone(s) used.  Where multiple mics used, prefix with channel number: 1-Neumann U87i, 2-AKG C414" category="Recording"/>
+          <attributeInfo attribute="micConfig" displayName="Microphone Config" description="Microphone configuration: Mono, AB, XY, ORTF, MS" category="Recording"/>
+          <attributeInfo attribute="micDistance" displayName="Microphone Perspective" description="Microphone distance in meters OR headmounted - 1m, 2m, 0.3m, head" category="Recording"/>
+          <attributeInfo attribute="recordingLoc" displayName="Recording Location" description="Recording location" category="Recording"/>
+          <attributeInfo attribute="isDesigned" displayName="Designed" description="SFX: Is the sound designed, or is it a raw recording - true if designed, false if raw recording" category="Recording"/>
+          <attributeInfo attribute="recEngineer" displayName="Recording Engineer" description="Name of the recording engineer" category="Recording"/>
+          <attributeInfo attribute="recStudio" displayName="Recording Studio" description="Music: Recording Studio" category="Recording"/>
+          <attributeInfo attribute="impulseLocation" displayName="Impulse Location" description="Impulse: Location of impulse" category="Impulse"/>
+          <attributeInfo attribute="category" displayName="SFX Category" description="UCS compliant SFX category" category="Sound Effects" editor="UcsEditor" editorInfo="Category"/>
+          <attributeInfo attribute="subCategory" displayName="SFX Sub-Category" description="UCS compliant SFX sub-category" category="Sound Effects" editor="UcsEditor" editorInfo="SubCategory"/>
+          <attributeInfo attribute="catId" displayName="Category ID" description="UCS compliant SFX category ID" category="Sound Effects" editor="UcsEditor" editorInfo="CatID"/>
+          <attributeInfo attribute="userCategory" displayName="User Category" description="UCS complaint user category" category="Sound Effects"/>
+          <attributeInfo attribute="userData" displayName="User Data" description="UCS compliant user data" category="Sound Effects"/>
+          <attributeInfo attribute="vendorCategory" displayName="Vendor Category" description="UCS compliant vendor category" category="Sound Effects"/>
+          <attributeInfo attribute="fxName" displayName="FX Name" description="UCS compliant FX name" category="Sound Effects"/>
+          <attributeInfo attribute="library" displayName="Library" description="UCS compliant library" category="Sound Effects"/>
+          <attributeInfo attribute="creatorId" displayName="Creator" description="UCS compliant SFX creator/publisher" category="Sound Effects"/>
+          <attributeInfo attribute="sourceId" displayName="SFX Source ID" description="UCS compliant SFX SourceID" category="Sound Effects"/>
+          <attributeInfo attribute="rmsPower" displayName="RMS" description="RMS power of file" category="Audio Features"/>
+          <attributeInfo attribute="loudness" displayName="Loudness" description="Integrated loudness of file, measured with ITU-R BS1770-3 compliant metering" category="Audio Features"/>
+          <attributeInfo attribute="loudnessRange" displayName="Loudness Range" description="Loudness Range - EBU 3342 compliant" category="Audio Features"/>
+          <attributeInfo attribute="maxPeak" displayName="Maximum Peak" description="Maximum sample value, in dBFS" category="Audio Features"/>
+          <attributeInfo attribute="specDensity" displayName="Spectral Density" description="Spectral density of file - amount of power at a standard set of frequency ranges.  Freq ranges to be defined***" category="Audio Features"/>
+          <attributeInfo attribute="zeroCrossRate" displayName="Zero Cross Rate" description="Zero Cross Rate, average frequency of entire file" category="Audio Features"/>
+          <attributeInfo attribute="papr" displayName="PAPR" description="Peak to average power ratio" category="Audio Features"/>
+          <attributeInfo attribute="text" displayName="Text" description="Dialogue: Transcript of the dialogue file" category="Dialogue"/>
+          <attributeInfo attribute="efforts" displayName="Efforts" description="Dialogue: Whether the file contains efforts, dialogue or a mix of the two - True, False, Mixed" category="Dialogue"/>
+          <attributeInfo attribute="effortType" displayName="Effort Type" description="Effort type - strain, pain" category="Dialogue"/>
+          <attributeInfo attribute="projection" displayName="Projection" description="Dialogue projection level.  1- whispered, 2- spoken, 3- raised, 4- projected, 5- shouted" category="Dialogue"/>
+          <attributeInfo attribute="language" displayName="Language" description=" Dialogue language - ISO639-1 Language Code" category="Dialogue" format="## e.g 'en'"/>
+          <attributeInfo attribute="timingRestriction" displayName="Timing Restriction" description="Dialogue timing restriction: wild, time, lip, na (not applicable)" category="Dialogue"/>
+          <attributeInfo attribute="characterName" displayName="Character Name" description="Dialogue: Character name for dialogue files" category="Dialogue"/>
+          <attributeInfo attribute="characterGender" displayName="Character Gender" description="Dialogue: Sex/gender of character" category="Dialogue"/>
+          <attributeInfo attribute="characterAge" displayName="Character Age" description="Dialogue: Age of (human) character" category="Dialogue"/>
+          <attributeInfo attribute="characterRole" displayName="Character Role" description="Dialogue: Whether the character is a main (significant) character or a background character: significant, background" category="Dialogue"/>
+          <attributeInfo attribute="actorName" displayName="Actor Name" description="Dialogue: Name of actor" category="Dialogue"/>
+          <attributeInfo attribute="actorGender" displayName="Actor Gender" description="Dialogue: Sex/gender of actor: male, female" category="Dialogue"/>
+          <attributeInfo attribute="director" displayName="Director" description="Dialogue: Name of director" category="Dialogue"/>
+          <attributeInfo attribute="direction" displayName="Direction" description="Director’s notes, for context; explaining the scene and character motivation." category="Dialogue"/>
+          <attributeInfo attribute="fxUsed" displayName="FX" description="Effects used on file eg. Radio" category="Dialogue"/>
+          <attributeInfo attribute="usageRights" displayName="Usage Rights" description="Dialogue: Code for usage rights of content: *Internal" category="Dialogue"/>
+          <attributeInfo attribute="isUnion" displayName="Is Union" description="Dialogue: Was recording done under a union contract: true, false" category="Dialogue"/>
+          <attributeInfo attribute="accent" displayName="Accent" description="Regional accent of the spoken dialogue, if applicable" category="Dialogue"/>
+          <attributeInfo attribute="emotion" displayName="Emotion" description="Emotional content present in the delivery of the dialogue" category="Dialogue"/>
+          <attributeInfo attribute="addresseeGender" displayName="Addressee Gender" description="Gender of addressee; male/female/malegroup/femalegroup/mixedgroup" category="Dialogue"/>
+          <attributeInfo attribute="isFormal" displayName="Is Formal" description="Either formal or informal, depending on the relationship between the speaker and the addressee. formal/informal" category="Dialogue"/>
+          <attributeInfo attribute="devLanguage" displayName="Developer Language" description="Original language used by developer" category="Dialogue"/>
+          <attributeInfo attribute="billingCode" displayName="Billing Code" description="Music: project billing code" category="Music"/>
+          <attributeInfo attribute="composer" displayName="Composer" description="Music: Composer" category="Music"/>
+          <attributeInfo attribute="artist" displayName="Artist" description="Music: Name of artist " category="Music"/>
+          <attributeInfo attribute="songTitle" displayName="Song Title" description="Music: Song title" category="Music"/>
+          <attributeInfo attribute="genre" displayName="Genre" description="Music: Genre" category="Music"/>
+          <attributeInfo attribute="subGenre" displayName="Sub-genre" description="Music: Sub-genre" category="Music"/>
+          <attributeInfo attribute="producer" displayName="Producer" description="Music: Producer name" category="Music"/>
+          <attributeInfo attribute="musicSup" displayName="Supervisor" description="Music: Music supervisor" category="Music"/>
+          <attributeInfo attribute="instrument" displayName="Instrument" description="Music: Instrument on track/stem" category="Music"/>
+          <attributeInfo attribute="musicPublisher" displayName="Publisher" description="Music: PublishtimeSiger" category="Music"/>
+          <attributeInfo attribute="rightsOwner" displayName="Rights Owner" description="Music: Owner of the recorded work" category="Music"/>
+          <attributeInfo attribute="isSource" displayName="Source" description="Music: Is this an asset as the composer delivered (source) or an edit of that source?  true, false" category="Music"/>
+          <attributeInfo attribute="isLoop" displayName="Loop" description="Is the content loopable - true, false" category="Music"/>
+          <attributeInfo attribute="intensity" displayName="Intensity" description="Music: intensity" category="Music"/>
+          <attributeInfo attribute="isFinal" displayName="Final" description="Music: Is cue temp or final" category="Music"/>
+          <attributeInfo attribute="orderRef" displayName="Order Reference" description="Order reference of cue, if applicable *Internal" category="Music"/>
+          <attributeInfo attribute="isOst" displayName="Original SoundTrack" description="Music: Is part of the Original Soundtrack" category="Music"/>
+          <attributeInfo attribute="isCinematic" displayName="Cinematic" description="Music: Asset is associated with a cinematic" category="Music"/>
+          <attributeInfo attribute="isLicensed" displayName="Licensed" description="Music: Asset is licensed and owned by 3rd party" category="Music"/>
+          <attributeInfo attribute="isDiegetic" displayName="Diegetic" description="Music: Track is diegetic in game" category="Music"/>
+          <attributeInfo attribute="musicVersion" displayName="Music Version" description="Music: Version number" category="Music"/>
+          <attributeInfo attribute="isrcId" displayName="ISRC Code" description="Music: ISRC code" category="Music" format="## ### ## ##### e.g 'UK AAA 05 00001'"/>
+          <attributeInfo attribute="tempo" displayName="Tempo" description="Music: Tempo in bpm" category="Music"/>
+          <attributeInfo attribute="timeSig" displayName="Time Signature" description="Music: Time Signature. e.g 3:4" category="Music" format="A:B e.g '3:4'"/>
+          <attributeInfo attribute="inKey" displayName="Key" description="Music: In key" category="Music"/>
+        </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+        <xs:extension base="metadataType"/>
+      </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="aswgType">
+      <xs:annotation>
+        <xs:appinfo>
+          <attributeInfo attribute="schemaVersion" displayName="Schema Version" description="Version of the ASWG Schema" format="#.#"/>
+        </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+        <xs:extension base="aswgType"/>
+      </xs:complexContent>
+    </xs:complexType>
+    
+  </xs:redefine>
+
+</xs:schema>
